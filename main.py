@@ -56,5 +56,4 @@ async def customki(ctx):
     await ctx.send(embed=embed)
 
 keep_alive()
-os.getEnv()
 client.run(os.environ['TOKEN'])
