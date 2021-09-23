@@ -1,10 +1,9 @@
 import discord
 import random
-import numpy
+import time
 from discord.ext import commands
 import os
 from keep_alive import keep_alive
-
 intents = discord.Intents().all()
 
 # 889969405776261154
@@ -26,12 +25,20 @@ async def customki(ctx):
     channelsID = ctx.message.author.voice.channel.id
     fTeam = []
     sTeam = []
+    curMembers = []
+    memberNames = []
     teams = [fTeam, sTeam]
-    embed = discord.Embed(title="Customs", color=0x0c8336)
+    channel = client.get_channel(channelsID)
+    for member in channel.members:
+      memberNames.append(member.name)
+    pass
+    embed = discord.Embed(title="Customs", color=0x91b9ee)
     embed.set_author(
         name="Porosuo", icon_url="https://cdn.discordapp.com/attachments/889986914885726229/890240446675177492/poro_harnold.jpg")
-    channel = client.get_channel(channelsID)
-    curMembers = []
+    print("Czas wykonania Komendy Customki[ "+str(time.ctime(time.time()))+"]")
+    print("Kanał na którym znajdują się gracze:" +
+          (ctx.message.author.voice.channel.name))
+    print("Lista osób na kanale: " + "[ " +', '.join(memberNames)+ " ]")
     if(len(channel.members) > 1):
         for member in channel.members:
             curMembers.append(member)
@@ -52,7 +59,7 @@ async def customki(ctx):
         embed.add_field(name="Drugi Team",
                         value=', '.join(sTeam), inline=False)
     else:
-        embed.add_field(name="Za mało graczy", value="0", inline=False)
+        embed.add_field(name="Za mało graczy", value="1", inline=False)
     await ctx.send(embed=embed)
 
 keep_alive()
